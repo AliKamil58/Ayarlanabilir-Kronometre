@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .div {
+        float: left;
+        background-color: blanchedalmond;
+        width: 200px;
+        height: 200px;
+        margin-right: 20px;
+        font-size: 140px;
+        text-align: center;
+      }
+      .genel {
+        display: flex;
+        justify-content: center;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 2rem;
+        border: 2px solid red;
+        height: 100vh;
+      }
+      .input-wrap {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-wrap">
+        <input type="number" class="hour" placeholder="SAAT" />
+        <input type="number" class="minute" placeholder="DAKİKA" />
+        <input type="number" class="second" placeholder="SANİYE" />
+      </div>
+      <button class="start-btn">START</button>
+      <div class="genel">
+        <div class="saat div"></div>
+        <div class="dakika div"></div>
+        <div class="saniye div"></div>
+      </div>
+    </div>
+
+    <script>
+      start();
+      function start() {
+        let buton = document.querySelector(".start-btn");
+        buton.addEventListener("click", () => {
+          let hour = document.querySelector(".hour").value;
+          let minute = document.querySelector(".minute").value;
+          let second = document.querySelector(".second").value;
+
+          saat = hour;
+          dakika = minute;
+          saniye = second;
+
+          let kullanıcı = setInterval(function () {
+            document.querySelector(".saat").innerHTML = saat;
+            document.querySelector(".saniye").innerHTML = saniye;
+            document.querySelector(".dakika").innerHTML = dakika;
+            if (document.querySelector(".saniye").innerHTML > 0) {
+              saniye--;
+            }
+            if (document.querySelector(".saniye").innerHTML == 0) {
+              saniye = 59;
+              dakika--;
+            }
+
+            if (document.querySelector(".dakika").innerHTML == -1) {
+              saat--;
+              dakika = 59;
+            }
+
+            if (
+              document.querySelector(".saat").innerHTML == 0 &&
+              document.querySelector(".dakika").innerHTML == 0 &&
+              document.querySelector(".saniye").innerHTML == 0
+            ) {
+              clearInterval(kullanıcı);
+            }
+          }, 1000);
+        });
+      }
+    </script>
+  </body>
+</html>
